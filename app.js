@@ -10,9 +10,10 @@ document.querySelectorAll(".tab-btn").forEach(btn => {
             if (entered === ADMIN_PASSWORD) {
                 localStorage.setItem("adminAuth", "true");
                 isAdmin = true;
+            } else {
+                alert("Incorrect password. Access denied.");
+                return; // Don't switch tabs if password is wrong
             }
-            isAdmin = localStorage.getItem("adminAuth") === "true";
-
         }
 
         // Switch tab
@@ -23,7 +24,31 @@ document.querySelectorAll(".tab-btn").forEach(btn => {
         document.getElementById(tabId).classList.add("active");
     });
 });
+/* ================= RESTORE ADMIN AUTH ================= */
+window.addEventListener("DOMContentLoaded", () => {
+    isAdmin = localStorage.getItem("adminAuth") === "true";
+});
+/* ================= LOGOUT HANDLER ================= */
+window.addEventListener("DOMContentLoaded", () => {
+    const logoutBtn = document.getElementById("logout-btn");
+    if (!logoutBtn) return;
 
+    logoutBtn.addEventListener("click", () => {
+        localStorage.removeItem("adminAuth");
+        isAdmin = false;
+        alert("Logged out");
+
+        // Switch back to public tab/view
+        document.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("active"));
+        document.querySelectorAll(".tab-content").forEach(t => t.classList.remove("active"));
+
+        const publicBtn = document.querySelector('.tab-btn[data-tab="bracket-view"]');
+        if (publicBtn) publicBtn.classList.add("active");
+        const publicSection = document.getElementById("bracket-view");
+        if (publicSection) publicSection.classList.add("active");
+    });
+});
+/* ================================================ */
 /* ================= STORAGE KEYS ================= */
 const STORAGE = {
     pool: "poolWinners",
@@ -47,30 +72,7 @@ const MATCH_KEY = "matchCenterData";
 
 const ADMIN_PASSWORD = "admin"; // change this
 let isAdmin = false;
-let isAdminUnlocked = sessionStorage.getItem("adminUnlocked") === "true";
 
-function openTab(tabId) {
-    const adminTabs = ["add", "bracket"];
-
-    if (adminTabs.includes(tabId) && !isAdminUnlocked) {
-        const input = prompt("Enter admin password:");
-
-        if (input !== ADMIN_PASSWORD) {
-            alert("Wrong password. Access denied.");
-            return; // ⛔ STOP HERE — THIS WAS MISSING
-        }
-
-        isAdminUnlocked = true;
-        sessionStorage.setItem("adminUnlocked", "true");
-    }
-
-    document.querySelectorAll(".tab-content").forEach(t => t.classList.remove("active"));
-    document.getElementById(tabId).classList.add("active");
-}
-function adminLogout() {
-    sessionStorage.removeItem("adminUnlocked");
-    location.reload();
-}
 
 
 /* ================= INIT ================= */
@@ -113,7 +115,6 @@ poolTeams.forEach((team, index) => {
         renderViewOnlyBracket();
     });
 });
-
 function updateQuarterFromPool(poolIndex, winners) {
     const base = poolIndex * 2;
     quarterCells[base].textContent = winners[0] || `QF ${base + 1}`;
@@ -611,72 +612,7 @@ function renderPublic(type) {
             container.appendChild(div);
         });
     }
-};
-
-//Add team
-function addTeam(poolId) {
-    const pool = document.querySelector(`[data-pool="${poolId}"] .team-list`);
-
-    const input = document.createElement("input");
-    input.type = "text";
-    input.placeholder = "Team Name";
-
-    pool.appendChild(input);
 }
-//Save Pools
-function savePools() {
-    const pools = {};
-
-    document.querySelectorAll(".pool").forEach(pool => {
-        const id = pool.dataset.pool;
-        pools[id] = [...pool.querySelectorAll("input")]
-            .map(i => i.value.trim())
-            .filter(Boolean);
-    });
-
-    localStorage.setItem("poolsData", JSON.stringify(pools));
-};
-
-// bracket data
-function renderPublicBracket() {
-    const bracket = JSON.parse(localStorage.getItem("bracketData")) || {};
-    const container = document.getElementById("publicBracketView");
-    
-
-    container.innerHTML = "";
-
-    ["Quarter Finals", "Semi Finals", "Final"].forEach(round => {
-        if (!bracket[round]) return;
-
-        const section = document.createElement("div");
-        section.className = "round-card";
-
-        section.innerHTML = `<h3>${round}</h3>`;
-
-        bracket[round].forEach(match => {
-            const div = document.createElement("div");
-            div.className = "match-card";
-
-            div.innerHTML = `
-                <div class="${match.winner === match.team1 ? 'winner' : ''}">
-                    ${match.team1}
-                </div>
-                <div class="vs">vs</div>
-                <div class="${match.winner === match.team2 ? 'winner' : ''}">
-                    ${match.team2}
-                </div>
-            `;
-
-            section.appendChild(div);
-        });
-
-        container.appendChild(section);
-    });
-}
-
-localStorage.setItem("bracketData", JSON.stringify(bracket));
-renderPublicBracket();
-document.addEventListener("DOMContentLoaded", renderPublicBracket);
 
 
 
