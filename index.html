@@ -51,156 +51,37 @@
 <body>
     <header>
         <nav class="navbar">
-            <button class="tab-btn active" data-tab="bracket-view">Public</button>
-            <button class="tab-btn" data-tab="add">Admin - Teams</button>
-            <button class="tab-btn" data-tab="bracket">Admin - Brackets</button>
+          <button class="tab-btn" data-tab="public">Public</button>
+            <button class="tab-btn" data-tab="add">Add Teams</button>
+            <button class="tab-btn" data-tab="bracket">Admin Bracket</button>
+
         </nav>
     </header>
     <main>
         <!-- BRACKET TAB View only-->
-        <section id="bracket-view" class="tab-content active">
-            <div class="public-match">
-                <div>
-                    <h2>Current Match</h2>
-                    <p id="public-current">— VS —</p>
-                </div>
-                <div>
-                    <h2>Next Match</h2>
-                    <p id="public-next">— VS —</p>
-                </div>
-            </div>
+       <section id="bracket-view" class="tab-content active">
+    <h1>Live Match Update</h1>
 
-            <div class="bracket-container">
-                <h1>🏆 Tournament Bracket</h1>
-                <table>
-                    <thead>
-                        <tr>
-                            <th class="round-label">Pool Stage</th>
-                            <th class="round-label">Quarter Finals</th>
-                            <th class="round-label">Semi Finals</th>
-                            <th class="round-label">Finals</th>
-                            <!-- <th class="round-label">Champion</th> -->
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <!-- POOL 1 -->
-                        <tr>
-                            <td class="pool-header">POOL 1</td>
-                            <td rowspan="3" class="quarter">QF 1</td>
-                            <td rowspan="6" class="semi">Semi 1</td>
-                            <td rowspan="13" class="final">Finalist 1</td>
-                            <!-- <td rowspan="27" class="champion">CHAMPION</td> -->
-                        </tr>
-                        <tr>
-                            <td class="pool-team">Team A1</td>
-                        </tr>
-                        <tr>
-                            <td class="pool-team">Team A2</td>
-                        </tr>
-                        <tr>
-                            <td class="pool-team">Team A3</td>
-                            <td rowspan="3" class="quarter">QF 2</td>
-                        </tr>
-                        <tr>
-                            <td class="pool-team">Team A4</td>
-                        </tr>
-                        <tr>
-                            <td class="pool-team">Team A5</td>
-                        </tr>
-                        
-                        <!-- Separator -->
-                        <tr>
-                            <!-- <td class="pool-separator" style="padding: 5px;"></td> -->
-                        </tr>
-                        
-                        <!-- POOL 2 -->
-                        <tr>
-                            <td class="pool-header">POOL 2</td>
-                            <td rowspan="3" class="quarter">QF 3</td>
-                            <td rowspan="6" class="semi">Semi 2</td>
-                        </tr>
-                        <tr>
-                            <td class="pool-team">Team B1</td>
-                        </tr>
-                        <tr>
-                            <td class="pool-team">Team B2</td>
-                        </tr>
-                        <tr>
-                            <td class="pool-team">Team B3</td>
-                            <td rowspan="3" class="quarter">QF 4</td>
-                        </tr>
-                        <tr>
-                            <td class="pool-team">Team B4</td>
-                        </tr>
-                        <tr>
-                            <td class="pool-team">Team B5</td>
-                        </tr>
-                        
-                        <!-- Separator -->
-                        <tr>
-                            <!-- <td class="pool-separator" style="padding: 5px;"></td> -->
-                        </tr>
-                        
-                        <!-- POOL 3 -->
-                        <tr>
-                            <td class="pool-header">POOL 3</td>
-                            <td rowspan="3" class="quarter">QF 5</td>
-                            <td rowspan="6" class="semi">Semi 3</td>
-                            <td rowspan="13" class="final">Finalist 2</td>
-                        </tr>
-                        <tr>
-                            <td class="pool-team">Team C1</td>
-                        </tr>
-                        <tr>
-                            <td class="pool-team">Team C2</td>
-                        </tr>
-                        <tr>
-                            <td class="pool-team">Team C3</td>
-                            <td rowspan="3" class="quarter">QF 6</td>
-                        </tr>
-                        <tr>
-                            <td class="pool-team">Team C4</td>
-                        </tr>
-                        <tr>
-                            <td class="pool-team">Team C5</td>
-                        </tr>
-                        
-                        <!-- Separator -->
-                        <tr>
-                                <!-- <td class="pool-separator" style="padding: 5px;"></td> -->
-                        </tr>
-                        
-                        <!-- POOL 4 -->
-                        <tr>
-                            <td class="pool-header">POOL 4</td>
-                            <td rowspan="3" class="quarter">QF 7</td>
-                            <td rowspan="6" class="semi">Semi 4</td>
-                        </tr>
-                        <tr>
-                            <td class="pool-team">Team D1</td>
-                        </tr>
-                        <tr>
-                            <td class="pool-team">Team D2</td>
-                        </tr>
-                        <tr>
-                            <td class="pool-team">Team D3</td>
-                            <td rowspan="3" class="quarter">QF 8</td>
-                        </tr>
-                        <tr>
-                            <td class="pool-team">Team D4</td>
-                        </tr>
-                        <tr>
-                            <td class="pool-team">Team D5</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </section>
+    <div class="public-controls" style="display: block; margin: 10px auto; text-align: center;">
+    <button onclick="renderPublic('live')">Live</button>
+    <button onclick="renderPublic('result')">Result</button>
+    <button onclick="renderPublic('upcoming')">Upcoming</button>
+</div>
+
+<div id="public-display"></div>
+
+
+    <div class="public-display">
+        <p id="public-display"></p>
+    </div>
+
+</section>
+
 
         <!-- ADD TEAMS TAB -->
         <section id="add" class="tab-content">
             <div class="match-control">
-                <h3>Match Control</h3>
+                <h2>Match Control</h2>
 
                 <div class="match-row">
                     <label>Current Match</label>
@@ -218,8 +99,41 @@
 
                 <button id="updateMatch">Update Match</button>
             </div>
+            <div class="match-admin">
+                <h3>Current Match Result</h3>
+
+                <div class="match-select">
+                    <button class="match-team" data-team="1" id="matchTeam1">Team 1</button>
+                    <span>VS</span>
+                    <button class="match-team" data-team="2" id="matchTeam2">Team 2</button>
+                </div>
+
+                <button id="saveMatchResult">Update Result</button>
+            </div>
+
 
             <h2>Add / Edit Teams</h2>
+
+            <!-- <div class="pool" data-pool="pool1">
+                <h3>Pool 1</h3>
+                <div class="team-list"></div>
+                <button onclick="addTeam('pool1')">+ Add Team</button>
+            </div>
+            <div class="pool" data-pool="pool2">
+                <h3>Pool 2</h3>
+                <div class="team-list"></div>
+                <button onclick="addTeam('pool2')">+ Add Team</button>
+            </div>
+            <div class="pool" data-pool="pool3">
+                <h3>Pool 3</h3>
+                <div class="team-list"></div>
+                <button onclick="addTeam('pool3')">+ Add Team</button>
+            </div>
+            <div class="pool" data-pool="pool4">
+                <h3>Pool 4</h3>
+                <div class="team-list"></div>
+                <button onclick="addTeam('pool4')">+ Add Team</button>
+            </div> -->
 
             <div class="pool">
                 <h3>Pool 1</h3>
@@ -390,6 +304,7 @@
         </section>
     
     </main>
+    <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
 <script src="app.js"></script>
 </body>
 </html>

@@ -1,9 +1,127 @@
+.bracket-mobile {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.round-card {
+    background: #fff;
+    border-radius: 10px;
+    padding: 12px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.match-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    margin-top: 8px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+}
+
+.match-card div {
+    flex: 1;
+    text-align: center;
+}
+
+.vs {
+    flex: 0.5;
+    font-weight: bold;
+}
+
+.winner {
+    font-weight: bold;
+    color: green;
+    text-decoration: underline;
+}
+
+#saveMatchResult{
+    padding: 10px;
+    margin: 20px auto;
+    text-align: center;
+    display: block;
+    cursor: pointer;
+    background-color: #63a470;
+    border: none;
+    border-radius: 10px;
+}
+.match-card {
+    padding: 14px;
+    margin: 10px auto;
+    border-radius: 10px;
+    max-width: 400px;
+    text-align: center;
+    font-size: 18px;
+    background: #f4f6f8;
+}
+
+.match-card.live {
+    background: #c8e6c9;
+    font-weight: bold;
+}
+
+.match-card.upcoming {
+    background: #bbdefb;
+}
+
+.match-card.result {
+    background: #fff3e0;
+}
+
+.winner {
+    font-weight: bold;
+    color: #2e7d32;
+}
+
+.loser {
+    text-decoration: line-through;
+    color: #c62828;
+}
+
+.loser {
+    text-decoration: line-through;
+    color: #888;
+}
  
+.match-admin {
+    margin-top: 25px;
+    padding: 20px;
+    border-radius: 10px;
+    background: #f9f9f9;
+    text-align: center;
+}
+
+.match-select {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    justify-content: center;
+    margin: 15px 0;
+}
+
+.match-team {
+    padding: 12px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 8px;
+    border: 2px solid #ccc;
+    background: white;
+}
+
+.match-team.selected {
+    border-color: #1e88e5;
+    background: #e3f2fd;
+    font-weight: bold;
+}
+
 .match-control {
     margin-top: 20px;
     padding: 16px;
     border: 1px solid #ddd;
     border-radius: 8px;
+    text-align: center;
 }
 
 .match-row {
@@ -12,6 +130,7 @@
     align-items: center;
     gap: 8px;
     margin-bottom: 10px;
+    margin-top: 20px;
 }
 
 .match-row input {
@@ -21,45 +140,59 @@
 
 #updateMatch {
     padding: 8px 16px;
-    background: #2e7d32;
+    background: #63a470;
     color: #fff;
     border: none;
     border-radius: 6px;
     cursor: pointer;
+    display: block;
+    margin: 20px auto;
 }
 
 #updateMatch:hover {
     background: #1b5e20;
 }
 
-.public-match {
+.public-buttons {
     display: flex;
-    flex-wrap: wrap;
-    gap: 30px;
+    gap: 15px;
     justify-content: center;
-    text-align: center;
-    padding: 20px;
-    border-radius: 10px;
-    background: #f9f9f9;
+    margin: 20px 0;
+}
+.public-controls button{
+     padding: 10px 20px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    background: #e0e0e0;
+    font-weight: 600;
 }
 
-.public-match p {
-    font-size: 18px;
+.public-btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    background: #e0e0e0;
     font-weight: 600;
 }
-#public-current{
-    font-size: 18px;
-    font-weight: 600;
-    background-color: rgb(140, 234, 140);
-    padding: 20px;
-    border-radius: 10px;
+
+.public-btn.active {
+    background: #1e88e5;
+    color: white;
 }
-#public-next{
-    font-size: 18px;
-    font-weight: 600;
-    background-color: rgb(141, 198, 202);
-    padding: 20px;
-    border-radius: 10px;
+
+.public-display {
+    margin-top: 30px;
+    text-align: center;
+}
+
+#public-display-text {
+    font-size: 24px;
+    font-weight: bold;
+    padding: 25px;
+    border-radius: 12px;
+    background: #f5f5f5;
 }
 
 .pool-team {
